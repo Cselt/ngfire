@@ -33,6 +33,10 @@
       "types": "./dist/functions/index.d.ts",
       "default": "./dist/functions/index.js"
     },
+    "./storage": {
+      "types": "./dist/storage/index.d.ts",
+      "default": "./dist/storage/index.js"
+    },
     "./emulators": {
       "types": "./dist/emulators/index.d.ts",
       "default": "./dist/emulators/index.js"

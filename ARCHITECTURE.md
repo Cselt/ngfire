@@ -11,6 +11,7 @@ ngfire
 ├── /firestore   → Firestore providers and helpers
 ├── /auth        → Auth providers and helpers
 ├── /functions   → Functions providers
+├── /storage     → Storage providers
 └── /emulators   → Emulator connection (cross-cutting, dev-only)
 ```
 
@@ -22,6 +23,7 @@ import { provideNgFire, fromFirebaseListener } from '@qarapace/ngfire/app';
 import { withAuth, AUTH, onIdTokenChanged$ } from '@qarapace/ngfire/auth';
 import { withFirestore, FIRESTORE, onSnapshot$ } from '@qarapace/ngfire/firestore';
 import { withFunctions, FUNCTIONS } from '@qarapace/ngfire/functions';
+import { withStorage, STORAGE } from '@qarapace/ngfire/storage';
 ```
 
 ## Tree-Shaking Strategy
@@ -40,6 +42,7 @@ These map to `exports` in `package.json`:
     "./firestore": "./dist/firestore/index.js",
     "./auth": "./dist/auth/index.js",
     "./functions": "./dist/functions/index.js",
+    "./storage": "./dist/storage/index.js",
     "./emulators": "./dist/emulators/index.js"
   }
 }
@@ -91,6 +94,9 @@ Each entry point follows a consistent internal structure:
 ├── functions/
 │   ├── index.ts
 │   └── provider.ts     ← withFunctions(), FUNCTIONS
+├── storage/
+│   ├── index.ts
+│   └── provider.ts     ← withStorage(), STORAGE
 ├── emulators/
 │   ├── index.ts
 │   └── provider.ts     ← withEmulators(), EmulatorConfig
@@ -108,6 +114,7 @@ ngfire/analytics  → ngfire/app
 ngfire/firestore  → ngfire/app
 ngfire/auth       → ngfire/app
 ngfire/functions  → ngfire/app
+ngfire/storage    → ngfire/app
 
 ngfire/firestore  ✗→  ngfire/auth      (never)
 ngfire/auth       ✗→  ngfire/functions  (never)

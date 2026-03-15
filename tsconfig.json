@@ -20,6 +20,7 @@
     "auth/**/*.ts",
     "firestore/**/*.ts",
     "functions/**/*.ts",
-    "emulators/**/*.ts"
+    "emulators/**/*.ts",
+    "storage/**/*.ts"
   ]
 }

@@ -30,6 +30,7 @@ Provide Firebase services (App, Firestore, Auth, Functions, etc.) through Angula
 FirebaseApp → Firestore
             → Auth
             → Functions
+            → Storage
             → ...
 ```
 
@@ -40,6 +41,7 @@ FirebaseApp → Firestore
 - Firestore
 - Auth
 - Functions
+- Storage
 
 ## Installation
 
