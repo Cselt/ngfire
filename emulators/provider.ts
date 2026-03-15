@@ -8,11 +8,13 @@ import { getApp } from 'firebase/app';
 import { connectAuthEmulator, getAuth } from 'firebase/auth';
 import { connectFirestoreEmulator, getFirestore } from 'firebase/firestore';
 import { connectFunctionsEmulator, getFunctions } from 'firebase/functions';
+import { connectStorageEmulator, getStorage } from 'firebase/storage';
 import { FIREBASE_APPS } from '../app/provider';
 import { NgFireFeatureFn } from '../app/types';
 import { AUTH_INSTANCES } from '../auth/provider';
 import { FIRESTORE_INSTANCES } from '../firestore/provider';
 import { FUNCTIONS_INSTANCES } from '../functions/provider';
+import { STORAGE_INSTANCES } from '../storage/provider';
 
 // ---------------------------------------------------------------------------
 // Configuration
@@ -22,6 +24,7 @@ export interface EmulatorConfig {
   firestore?: { host: string; port: number };
   auth?: { url: string };
   functions?: { host: string; port: number };
+  storage?: { host: string; port: number };
 }
 
 // ---------------------------------------------------------------------------
@@ -80,6 +83,14 @@ export function withEmulators(emulators: EmulatorConfig): NgFireFeatureFn {
           emulators.functions.port
         );
       }
+      if (emulators.storage) {
+        inject(STORAGE_INSTANCES); // ensure Storage is created
+        connectStorageEmulator(
+          getStorage(app),
+          emulators.storage.host,
+          emulators.storage.port
+        );
+      }
     }),
   ];
 }
@@ -105,6 +116,7 @@ export function withEmulators(emulators: EmulatorConfig): NgFireFeatureFn {
  *     provideFirebaseEmulators({
  *       functions: { host: 'localhost', port: 5001 },
  *       firestore: { host: 'localhost', port: 8086 },
+ *       storage:   { host: 'localhost', port: 9199 }
  *     }),
  *   ],
  * };
